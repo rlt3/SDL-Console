@@ -1,6 +1,6 @@
 cc=gcc
-cflags=-Wall -g -ggdb --std=c99 $(shell freetype-config --cflags)
-ldflags=-lSDL2 -lGL -lm $(shell freetype-config --libs)
+cflags=-Wall -g -ggdb --std=c99 $(shell pkg-config freetype2 --cflags)
+ldflags=-lSDL2 -lGL -lm $(shell pkg-config freetype2 --libs)
 
 all: example
 example:
