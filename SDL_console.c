@@ -606,6 +606,9 @@ _Console_set_window_size (Console_tty *tty)
     tty->wrap_len = 
         roundf((float)tty->window_width / (float)tty->font.char_width);
 
+    glUseProgram(tty->shader_prog);
+    glViewport(0, 0, tty->window_width, tty->window_height);
+
     /* 
      * Setup 2D projection matrix for vertex shader.
      * left, right, bottom, top
@@ -626,6 +629,8 @@ _Console_set_window_size (Console_tty *tty)
     Console_Line *li;
     for (li = tty->lines_head; li != NULL; li = li->next)
         _Console_update_line_texture(tty, li, li);
+
+    glUseProgram(0);
 }
 
 /*
